@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Amado - Furniture Ecommerce Template | Checkout</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" th:href="@{/img/core-img/favicon.ico}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" th:href="@{/css/core-style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+</head>
+
+
+<body>
+
+
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    <!-- Mobile Nav (max width 767px)-->
+    <div class="mobile-nav">
+        <!-- Navbar Brand -->
+        <div class="amado-navbar-brand">
+            <img th:src="@{/img/core-img/logo.png}" alt="">
+        </div>
+        <!-- Navbar Toggler -->
+        <div class="amado-navbar-toggler">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Header Area Start -->
+    <header class="header-area clearfix">
+        <!-- Close Icon -->
+        <div class="nav-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <!-- Logo -->
+        <div class="logo">
+            <img th:src="@{/img/core-img/logo.png}" alt="">
+        </div>
+        <!-- Amado Nav -->
+        <nav class="amado-nav">
+            <ul>
+                <li><a th:href="@{/admin/}">Список клиентов</a></li>
+                <li class="active"><a th:href="@{/admin/purchase}">Список заказов</a></li>
+                <li><a th:href="@{/admin/category}">Категории и товары </a></li>
+
+
+            </ul>
+        </nav>
+
+
+    </header>
+    <!-- Header Area End -->
+
+    <div class="cart-table-area section-padding-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="cart-title mt-50"  th:object="${category}">
+
+                        <h2  th:text="${ 'Товары из категрии ' + category.getTitle() }">Список категорий</h2>
+                        <a th:href="@{/admin/item/new}">
+                            <img th:src="@{/img/bg-img/plus.png}" alt="">
+                        </a>
+<!--                        <a th:href="@{/admin/category/new}">-->
+<!--                            <img th:src="@{/img/bg-img/plus.png}" alt="">-->
+<!--                        </a>-->
+                    </div>
+
+                    <div th:if="${#lists.isEmpty(items)}">
+                        <h5>В категории нет товаров</h5>
+                    </div>
+
+
+                    <div class="cart-table clearfix">
+
+                        <table class="table table-responsive" th:unless="${#lists.isEmpty(items)}">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Изображение</th>
+                                <th>Название</th>
+                                <th>Цена</th>
+                                <th>Описание</th>
+                                <th>мзменить</th>
+                                <th>Удалить</th>
+                                <th></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="item,iStat :${items}">
+                                <td class="cart_product_img">
+                                    <h5 th:text="${iStat.index+1}">White Modern Chair</h5>
+                                </td>
+
+                                <td class="cart_product_img">
+                                    <img th:src="@{${item.getImage()}}" alt="pic">
+                                    <img th:src="@{${item.getOther_image()}}" alt="pic">
+                                </td>
+                                <td class="cart_product_desc">
+                                    <h5 th:text="${item.getTitle()}">White Modern Chair</h5>
+                                </td>
+                                <td class="price">
+                                    <span th:text="${item.getPrice() + 'Р'}">$130</span>
+                                </td>
+                                <td class="price">
+                                    <span th:text="${item.getDescription()}">$130</span>
+                                </td>
+                                <td class="price">
+                                    <span th:text="${item.getBrand().getTitle()}">$130</span>
+                                </td>
+                                <td class="cart_product_desc">
+                                    <a th:href="@{/admin/item/change/{id} (id=${item.getId()})}">
+                                        <img th:src="@{/img/bg-img/pen.png}" alt="">
+                                    </a>
+                                </td>
+
+                                <td class="cart_product_desc">
+                                    <a th:href="@{/admin/item/delete/{id} (id=${item.getId()})}">
+                                        <img th:src="@{/img/bg-img/trash.png}" alt="">
+                                    </a>
+                                </td>
+
+                            </tr>
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- ##### Footer Area Start ##### -->
+<footer class="footer_area clearfix">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Single Widget Area -->
+            <div class="col-12 col-lg-4">
+                <div class="single_widget_area">
+                    <!-- Logo -->
+                    <div class="footer-logo mr-50">
+                        <a href="index.html"><img th:src="@{/img/core-img/logo2.png}" alt=""></a>
+                    </div>
+                    <!-- Copywrite Text -->
+                    <p class="copywrite">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                                                                            aria-hidden="true"></i> by <a
+                            href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<!-- ##### Footer Area End ##### -->
+
+<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+<script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
+<!-- Popper js -->
+<script th:src="@{/js/popper.min.js}"></script>
+<!-- Bootstrap js -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!-- Plugins js -->
+<script th:src="@{/js/plugins.js}"></script>
+<!-- Active js -->
+<script th:src="@{/js/active.js}"></script>
+
+</body>
+
+</html>
